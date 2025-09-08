@@ -12,6 +12,7 @@ const SOURCES = {
   usd:    { label: 'Source: FRED (DTWEXBGS)', url: 'https://fred.stlouisfed.org/series/DTWEXBGS' },
   yields: { label: 'Source: FRED (DGS2, DGS10)', url: 'https://fred.stlouisfed.org' };
   spread: { label: 'Source: FRED (T10Y2Y)', url: 'https://fred.stlouisfed.org/series/T10Y2Y' };
+  vix:    { label: 'Source: FRED — VIXCLS', url: 'https://fred.stlouisfed.org/series/VIXCLS' };
 
   // defi sources:
   // stablecoins: { label: 'Source: DefiLlama (Stablecoins)', url: 'https://defillama.com/stablecoins' },
@@ -103,6 +104,18 @@ function lineDS(label, data, color){
     type: 'line',
     data: { labels, datasets: [ lineDS('10Y–2Y (T10Y2Y)', vals, PALETTE[4]) ] }, // pink
     options: { responsive: true }
+  });
+})();
+
+// vix
+(async () => {
+  const vix = await (await fetch('data/vix.json', {cache:'no-cache'})).json();
+  setMeta('vix', vix);
+  const labels = vix.points.map(p=>p.date);
+  const vals   = vix.points.map(p=>p.value);
+  new Chart(document.getElementById('vix'), {
+    type: 'line',
+    data: { labels, datasets: [ lineDS('VIX (FRED:VIXCLS)', vals, '#a78bfa') ] } // violet
   });
 })();
 
