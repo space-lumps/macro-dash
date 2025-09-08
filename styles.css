@@ -13,8 +13,9 @@ html,body{
     font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;
 }
 
+/* Center the main container and keep it reasonably narrow */
 main{
-  max-width: 1200px;           /* cap width on big screens */
+  max-width: 1040px;           /* narrower to fit 2 columns */
   width: 100%;
   margin: 0 auto;              /* center horizontally */
   padding: 20px;
@@ -27,15 +28,15 @@ p{color:var(--muted);}
 /* Responsive grid that NEVER squeezes below a sane width */
 .grid{
   display: grid;
-  gap: 20px;
+  gap: 16px;
   /* Each card must be at least 520px wide; grid auto-fits as many as will fit.
      Result: 2 columns on wide screens, 1 column when viewport < ~1040px. */
-  grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
   align-items: stretch;
 }
 
 /* Card + canvas size */
-.chart{background:#181818;border:1px solid #262626;border-radius:12px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.25);}
+.chart{background:#181818;border:1px solid #262626;border-radius:12px;padding:14px;box-shadow:0 2px 12px rgba(0,0,0,.25);}
 /* Keep charts rectangular (16:9), avoid square “boxes” */
 .chart canvas{
   width:100% !important;
@@ -43,6 +44,8 @@ p{color:var(--muted);}
   aspect-ratio: 16 / 9;        /* consistent shape as the card grows */
 }
 
+/* Small caption under each chart */
+.caption{ margin-top:8px; color:#5ca3ff; font-size:0.95rem; line-height:1.35; }
 
-/* Links (BTC orange) */
+/* Links (BTC orange) *//* Small caption under each chart */
 a{color:var(--accent); text-decoration: underline dotted;}
