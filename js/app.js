@@ -38,7 +38,7 @@ function lineDS(label, data, color){
   const values = usd.points.map(p=>p.value);
   new Chart(document.getElementById('usd'), {
     type: 'line',
-    data: { labels, datasets: [ lineDS('USD Broad Index (FRED:DTWEXBGS)', values, PALETTE[3]) ] },
+    data: { labels, datasets: [ lineDS('USD Broad Index (FRED:DTWEXBGS)', values, PALETTE[2]) ] },
     options: { responsive: true }
   });
 })();
