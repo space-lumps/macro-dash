@@ -26,3 +26,8 @@ if __name__ == "__main__":
     # Broad Dollar Index (good proxy for USD strength / DXY-like)
     write_json("usd_index.json", fred_series("DTWEXBGS"))
     print("OK")
+
+    # Treasuries
+    write_json("yield_2y.json",   fred_series("DGS2"))
+    write_json("yield_10y.json",  fred_series("DGS10"))
+    write_json("spread_10y_2y.json", fred_series("T10Y2Y"))
