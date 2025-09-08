@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>On-Chain Analytics</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"> -->
   <link rel="stylesheet" href="styles.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -16,12 +16,18 @@
   <section class="grid">
     <div class="chart">
       <canvas id="m2"></canvas>
+      <div class="caption">
+        <strong>M2 money stock:</strong> Broad USD liquidity. Rising M2 = easier liquidity → tailwind for risk (often supportive for BTC); falling = headwind.
+      </div>
     </div>
 
-    <!-- placeholder for future charts -->
     <div class="chart">
       <canvas id="usd"></canvas>
+      <div class="caption">
+        <strong>USD Broad Index:</strong> Dollar strength. Typically inverse to BTC—strong USD = risk-off; weak USD = risk-on.
+      </div>
     </div>
+  </section>
 
     </div>
   </section>
