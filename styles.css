@@ -1,4 +1,14 @@
-main { max-width: 1100px; margin: 0 auto; }
-.chart { background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
-.chart canvas { width: 100% !important; height: auto !important; }
-.grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+/* Layout */
+main { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+.grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); }
+
+/* Cards */
+.chart { background: #2a2a2a; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,.25); }
+
+/* Canvas sizing (bigger) */
+.chart canvas { width: 100% !important; height: 360px !important; }
+
+/* Dark gray theme */
+:root { color-scheme: dark; }
+html, body { background: #1e1e1e; color: #e6e6e6; }
+a { color: #9ecbff; }
