@@ -1,4 +1,9 @@
-// Temporary placeholder chart (will swap to real data soon)
+// Neutral dark theme for Chart.js
+Chart.defaults.color = '#d0d0d0';          // axis/label text
+Chart.defaults.borderColor = '#2a2a2a';    // grid/borders
+Chart.defaults.font.family = 'system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif';
+
+// Temporary placeholder chart
 const ctx = document.getElementById('example');
 if (ctx) {
   new Chart(ctx, {
