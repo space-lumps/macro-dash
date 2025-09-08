@@ -1,4 +1,4 @@
-/* Dark gray theme */
+/* Dark gray theme + BTC orange */
 :root{
   --bg:#121212; --surface:#181818; --border:#262626;
   --text:#e6e6e6; --muted:#b8b8b8; --accent:#f7931a; 
@@ -11,12 +11,13 @@ main{max-width:1200px; margin:0 auto; padding:16px 20px;}
 h1{margin:0 0 8px;}
 p{color:var(--muted);}
 
-/* Layout */
-.grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(420px,1fr));}
+/* Layout: 2 columns on desktop, 1 on small screens */
+.grid{display:grid;gap:16px;grid-template-columns:repeat(2,minmax(0,1fr));}
+@media (max-width:1024px){ .grid{grid-template-columns:1fr;} }
 
-/* Cards */
-.chart{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px; box-shadow:0 2px 12px rgba(0,0,0,.25);}
-.chart canvas{width:100%!important; height:420px!important;} /* bigger charts */
+/* Card + canvas size */
+.chart{background:#181818;border:1px solid #262626;border-radius:12px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.25);}
+.chart canvas{width:100% !important;height:340px !important;}  /* adjust up/down (300–380px) */
 
-/* Links (neutral) */
+/* Links (BTC orange) */
 a{color:var(--accent); text-decoration: underline dotted;}
