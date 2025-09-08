@@ -10,9 +10,9 @@ const PALETTE = ['#60a5fa','#a78bfa','#34d399','#f59e0b','#f472b6','#22d3ee']; /
 const SOURCES = {
   m2:     { label: 'Source: FRED (M2SL)', url: 'https://fred.stlouisfed.org/series/M2SL' },
   usd:    { label: 'Source: FRED (DTWEXBGS)', url: 'https://fred.stlouisfed.org/series/DTWEXBGS' },
-  yields: { label: 'Source: FRED (DGS2, DGS10)', url: 'https://fred.stlouisfed.org' };
-  spread: { label: 'Source: FRED (T10Y2Y)', url: 'https://fred.stlouisfed.org/series/T10Y2Y' };
-  vix:    { label: 'Source: FRED — VIXCLS', url: 'https://fred.stlouisfed.org/series/VIXCLS' };
+  yields: { label: 'Source: FRED (DGS2, DGS10)', url: 'https://fred.stlouisfed.org' },
+  spread: { label: 'Source: FRED (T10Y2Y)', url: 'https://fred.stlouisfed.org/series/T10Y2Y' },
+  vix:    { label: 'Source: FRED — VIXCLS', url: 'https://fred.stlouisfed.org/series/VIXCLS' },
 
   // defi sources:
   // stablecoins: { label: 'Source: DefiLlama (Stablecoins)', url: 'https://defillama.com/stablecoins' },
