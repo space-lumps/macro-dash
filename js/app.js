@@ -119,12 +119,6 @@ function lineDS(label, data, color){
   });
 })();
 
-
-
-
-
-
-
 // Temporary placeholder chart
 const ctx = document.getElementById('example');
 if (ctx) {
@@ -152,4 +146,3 @@ async function loadJSON(p){ const r = await fetch(p, {cache:'no-cache'}); return
     });
   } catch(e) { console.error('Failed to load M2:', e); }
 })();
-
