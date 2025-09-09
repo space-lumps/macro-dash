@@ -45,6 +45,7 @@ function lineDS(label, data, color){
     label, data,
     borderColor: color,
     backgroundColor: color,
+    borderWidth: 1.5, // default lines are too thick
     pointRadius: 2,
     pointHoverRadius: 4,
     tension: 0.25,    // slight smoothing
