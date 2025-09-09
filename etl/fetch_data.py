@@ -32,3 +32,7 @@ if __name__ == "__main__":
     write_json("spread_10y_2y.json", fred_series("T10Y2Y"))
     # Risk sentiment / Volatility
     write_json("vix.json", fred_series("VIXCLS"))
+     # CPI (Consumer Price Index for All Urban Consumers, seasonally adjusted)
+    write_json("cpi.json", fred_series("CPIAUCSL"))
+    # Federal Funds Effective Rate
+    write_json("fedfunds.json", fred_series("FEDFUNDS"))
