@@ -42,13 +42,14 @@ function setMeta(idBase, jsonOrIso){
 // Helper: make a line dataset that pops
 function lineDS(label, data, color){
   return {
-    label, data,
+    label, 
+    data,
     borderColor: color,
     backgroundColor: color,
-    borderWidth: 1.5, // default lines are too thick
-    pointRadius: 2,
-    pointHoverRadius: 4,
-    tension: 0.25,    // slight smoothing
+    borderWidth: 1.5,     // thin, crisp line
+    pointRadius: 0,       // no dots cluttering the line
+    pointHoverRadius: 4,  // dot appears only on hover
+    tension: 0.1,         // light smoothing (0 = straight, 1 = very curved)
     fill: false
   };
 }
