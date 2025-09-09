@@ -36,6 +36,18 @@ Data updates daily via [GitHub Actions](.github/workflows/update-data.yml) and i
 
 ---
 
+## Future Integration
+
+This macro dashboard is the first component of a larger analytics project.
+
+- **On-chain Dashboard (Dune):** DeFi indicators such as stablecoin supply, DEX volume, and funding/open interest will be queried and visualized in Dune.  
+- **Combined Streamlit App:** The macro indicators from this repo will be integrated with DeFi/on-chain data into a single interactive Streamlit application.  
+- **Goal:** Provide a holistic view of how macroeconomic conditions (liquidity, rates, USD strength, volatility) interact with crypto-native flows (stablecoins, exchanges, L2 activity) to shape market behavior.
+
+**Flow:** FRED → GitHub Actions → JSON → GitHub Pages (Macro) + Dune (DeFi) → Streamlit (combined app)
+
+---
+
 ## Tech Stack
 
 - **Frontend:** HTML, CSS, JavaScript, [Chart.js](https://www.chartjs.org/)  
