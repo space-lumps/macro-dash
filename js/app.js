@@ -52,100 +52,135 @@ function lineDS(label, data, color){
   };
 }
 
-// M2
+// M2 (M2SL)
 (async () => {
-  const m2 = await (await fetch('data/m2.json',{cache:'no-cache'})).json();
-  setMeta('m2', m2);
-  const labels = m2.points.map(p=>p.date);
-  const values = m2.points.map(p=>p.value);
-  new Chart(document.getElementById('m2'), {
-    type: 'line',
-    data: { labels, datasets: [ lineDS('M2 (FRED:M2SL)', values, PALETTE[0]) ] },
-    options: { responsive: true, plugins:{legend:{display:true}} }
-  });
+  try {
+    const r = await fetch('data/m2.json', { cache: 'no-cache' });
+    if (!r.ok) throw new Error(`m2.json ${r.status}`);
+    const data = await r.json();
+    setMeta('m2', data);
+    const labels = data.points.map(p => p.date);
+    const vals   = data.points.map(p => p.value);
+    new Chart(document.getElementById('m2'), {
+      type: 'line',
+      data: { labels, datasets: [ lineDS('M2 (FRED:M2SL)', vals, '#60a5fa') ] },
+      options: { responsive: true }
+    });
+  } catch (e) { console.error('Failed to load M2:', e); }
 })();
 
-// USD Index (DTWEXBGS)
+// USD Broad Index (DTWEXBGS)
 (async () => {
-  const usd = await (await fetch('data/usd_index.json',{cache:'no-cache'})).json();
-  setMeta('usd', usd);
-  const labels = usd.points.map(p=>p.date);
-  const values = usd.points.map(p=>p.value);
-  new Chart(document.getElementById('usd'), {
-    type: 'line',
-    data: { labels, datasets: [ lineDS('USD Broad Index (FRED:DTWEXBGS)', values, PALETTE[2]) ] },
-    options: { responsive: true }
-  });
+  try {
+    const r = await fetch('data/usd_index.json', { cache: 'no-cache' });
+    if (!r.ok) throw new Error(`usd_index.json ${r.status}`);
+    const data = await r.json();
+    setMeta('usd', data);
+    const labels = data.points.map(p => p.date);
+    const vals   = data.points.map(p => p.value);
+    new Chart(document.getElementById('usd'), {
+      type: 'line',
+      data: { labels, datasets: [ lineDS('USD Broad Index (DTWEXBGS)', vals, '#34d399') ] },
+      options: { responsive: true }
+    });
+  } catch (e) { console.error('Failed to load USD index:', e); }
 })();
 
-// Yields: 2Y vs 10Y
+// UST 2Y (DGS2) vs 10Y (DGS10)
 (async () => {
-  const y2  = await (await fetch('data/yield_2y.json',{cache:'no-cache'})).json();
-  const y10 = await (await fetch('data/yield_10y.json',{cache:'no-cache'})).json();
-  // choose newest updated time across both
-  const upd = [y2?._meta?.generated_utc || y2?.updated_at, y10?._meta?.generated_utc || y10?.updated_at]
-  .filter(Boolean).sort().slice(-1)[0];
-  setMeta('yields', upd);
-  const labels = y10.points.map(p=>p.date);
-  const twoY   = y2.points.map(p=>p.value);
-  const tenY   = y10.points.map(p=>p.value);
-  new Chart(document.getElementById('yields'), {
-    type: 'line',
-    data: { labels, datasets: [
-      lineDS('2Y (DGS2)', twoY,  PALETTE[5]),   // cyan
-      lineDS('10Y (DGS10)', tenY, PALETTE[1])   // violet
-    ]},
-    options: { responsive: true }
-  });
+  try {
+    const r2  = await fetch('data/yield_2y.json',  { cache: 'no-cache' });
+    const r10 = await fetch('data/yield_10y.json', { cache: 'no-cache' });
+    if (!r2.ok)  throw new Error(`yield_2y.json ${r2.status}`);
+    if (!r10.ok) throw new Error(`yield_10y.json ${r10.status}`);
+    const y2  = await r2.json();
+    const y10 = await r10.json();
+    const upd = [y2?._meta?.generated_utc||y2?.updated_at, y10?._meta?.generated_utc||y10?.updated_at]
+      .filter(Boolean).sort().slice(-1)[0];
+    setMeta('yields', upd);
+    const labels = y10.points.map(p=>p.date);
+    new Chart(document.getElementById('yields'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          lineDS('2Y (DGS2)',  y2.points.map(p=>p.value),  '#22d3ee'),
+          lineDS('10Y (DGS10)',y10.points.map(p=>p.value), '#a78bfa')
+        ]
+      },
+      options: { responsive: true }
+    });
+  } catch (e) { console.error('Failed to load 2Y/10Y:', e); }
 })();
 
-// 10s–2s spread
+// 10Y–2Y Spread (T10Y2Y)
 (async () => {
-  const sp = await (await fetch('data/spread_10y_2y.json',{cache:'no-cache'})).json();
-  setMeta('spread', sp);
-  const labels = sp.points.map(p=>p.date);
-  const vals   = sp.points.map(p=>p.value);
-  new Chart(document.getElementById('spread'), {
-    type: 'line',
-    data: { labels, datasets: [ lineDS('10Y–2Y (T10Y2Y)', vals, PALETTE[4]) ] }, // pink
-    options: { responsive: true }
-  });
+  try {
+    const r = await fetch('data/spread_10y_2y.json', { cache: 'no-cache' });
+    if (!r.ok) throw new Error(`spread_10y_2y.json ${r.status}`);
+    const data = await r.json();
+    setMeta('spread', data);
+    const labels = data.points.map(p=>p.date);
+    const vals   = data.points.map(p=>p.value);
+    new Chart(document.getElementById('spread'), {
+      type: 'line',
+      data: { labels, datasets: [ lineDS('10Y–2Y (T10Y2Y)', vals, '#f472b6') ] },
+      options: { responsive: true }
+    });
+  } catch (e) { console.error('Failed to load spread:', e); }
 })();
 
-// vix
+// VIX (VIXCLS)
 (async () => {
-  const vix = await (await fetch('data/vix.json', {cache:'no-cache'})).json();
-  setMeta('vix', vix);
-  const labels = vix.points.map(p=>p.date);
-  const vals   = vix.points.map(p=>p.value);
-  new Chart(document.getElementById('vix'), {
-    type: 'line',
-    data: { labels, datasets: [ lineDS('VIX (FRED:VIXCLS)', vals, '#a78bfa') ] } // violet
-  });
+  try {
+    const r = await fetch('data/vix.json', { cache: 'no-cache' });
+    if (!r.ok) throw new Error(`vix.json ${r.status}`);
+    const data = await r.json();
+    setMeta('vix', data);
+    const labels = data.points.map(p=>p.date);
+    const vals   = data.points.map(p=>p.value);
+    new Chart(document.getElementById('vix'), {
+      type: 'line',
+      data: { labels, datasets: [ lineDS('VIX (VIXCLS)', vals, '#a78bfa') ] },
+      options: { responsive: true }
+    });
+  } catch (e) { console.error('Failed to load VIX:', e); }
 })();
 
-// CPI
+// CPI (CPIAUCSL)
 (async () => {
-  const data = await loadJSON('data/cpi.json');
-  if (!data) return;
-  setMeta('cpi', data);
-  const labels = data.points.map(p=>p.date);
-  const vals   = data.points.map(p=>p.value);
-  new Chart(document.getElementById('cpi'), {
-    type: 'line',
-    data: { labels, datasets: [ lineDS('CPI (CPIAUCSL)', vals, '#f87171') ] } // red
-  });
+  try {
+    const r = await fetch('data/cpi.json', { cache: 'no-cache' });
+    if (!r.ok) throw new Error(`cpi.json ${r.status}`);
+    const data = await r.json();
+    setMeta('cpi', data);  // uses SOURCES.cpi
+    const labels = data.points.map(p => p.date);
+    const vals   = data.points.map(p => p.value);
+    new Chart(document.getElementById('cpi'), {
+      type: 'line',
+      data: { labels, datasets: [ lineDS('CPI (CPIAUCSL)', vals, '#f87171') ] }, // red
+      options: { responsive: true }
+    });
+  } catch (e) {
+    console.error('Failed to load CPI:', e);
+  }
 })();
 
-// Fed Funds
+// Fed Funds (FEDFUNDS)
 (async () => {
-  const data = await loadJSON('data/fedfunds.json');
-  if (!data) return;
-  setMeta('fedfunds', data);
-  const labels = data.points.map(p=>p.date);
-  const vals   = data.points.map(p=>p.value);
-  new Chart(document.getElementById('fedfunds'), {
-    type: 'line',
-    data: { labels, datasets: [ lineDS('Fed Funds Rate (FEDFUNDS)', vals, '#facc15') ] } // yellow
-  });
+  try {
+    const r = await fetch('data/fedfunds.json', { cache: 'no-cache' });
+    if (!r.ok) throw new Error(`fedfunds.json ${r.status}`);
+    const data = await r.json();
+    setMeta('fedfunds', data);  // uses SOURCES.fedfunds
+    const labels = data.points.map(p => p.date);
+    const vals   = data.points.map(p => p.value);
+    new Chart(document.getElementById('fedfunds'), {
+      type: 'line',
+      data: { labels, datasets: [ lineDS('Fed Funds Rate (FEDFUNDS)', vals, '#facc15') ] }, // yellow
+      options: { responsive: true }
+    });
+  } catch (e) {
+    console.error('Failed to load Fed Funds:', e);
+  }
 })();
